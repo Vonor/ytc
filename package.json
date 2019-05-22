@@ -1,0 +1,62 @@
+{
+  "name": "yaml-template-converter",
+  "bin": {
+    "ytc": "dist/ytc.js"
+  },
+  "version": "0.0.1",
+  "description": "Yaml templating for config files",
+  "main": "src/ytc.js",
+  "scripts": {
+    "start": "babel-node .",
+    "build": "babel src --out-dir dist",
+    "help": "babel --help"
+  },
+  "keywords": [
+    "yaml",
+    "template",
+    "config",
+    "json",
+    "cli"
+  ],
+  "author": "Michael Melcher",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vonor/ytc.git"
+  },
+  "license": "GPL-3.0-or-later",
+  "babel": {
+    "plugins": [
+      "@babel/plugin-transform-async-to-generator",
+      "@babel/plugin-transform-runtime"
+    ],
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "10"
+          }
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "@babel/code-frame": "^7.0.0",
+    "@babel/parser": "^7.4.5",
+    "@babel/runtime": "^7.4.5",
+    "commander": "^2.20.0",
+    "handlebars": "^4.1.2",
+    "isvalid": "^2.4.6",
+    "js-yaml": "^3.13.1",
+    "mapTypes": "github:vonor/maptypes"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/plugin-transform-async-to-generator": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4"
+  }
+}
