@@ -9,7 +9,7 @@
   "scripts": {
     "start": "babel-node .",
     "build": "babel src --out-dir dist",
-    "install": "babel src --out-dir dist"
+    "preinstall": "babel src --out-dir dist"
   },
   "keywords": [
     "yaml",
