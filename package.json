@@ -8,8 +8,7 @@
   "main": "src/ytc.js",
   "scripts": {
     "start": "babel-node .",
-    "build": "babel src --out-dir dist",
-    "preinstall": "babel src --out-dir dist"
+    "build": "babel src --out-dir dist"
   },
   "keywords": [
     "yaml",
@@ -48,7 +47,9 @@
     "handlebars": "^4.1.2",
     "isvalid": "^2.4.6",
     "js-yaml": "^3.13.1",
-    "mapTypes": "github:vonor/maptypes",
+    "mapTypes": "github:vonor/maptypes"
+  },
+  "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
