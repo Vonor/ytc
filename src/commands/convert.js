@@ -37,6 +37,7 @@ const convert = async (inputFile) => {
         try {
             await mkdir(path.dirname(outfile), { recursive: true })
             await fileWrite(outfile, result)
+            console.log(`${outfile} written`)
         } catch (error) {
             throw error
         }
