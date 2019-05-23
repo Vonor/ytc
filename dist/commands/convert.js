@@ -51,7 +51,7 @@ function () {
       const template = yield _handlebars.default.compile(templateData);
       inputData.env = process.env;
       const result = yield template(inputData);
-      const outputextension = inputData.outputextension;
+      const outputextension = inputData.outputextension || '.conf';
 
       const outfile = _path.default.resolve(inputFile.replace('configs', 'output').replace(_path.default.extname(inputFile), outputextension));
 
@@ -60,6 +60,7 @@ function () {
           recursive: true
         });
         yield fileWrite(outfile, result);
+        console.log(`${outfile} written`);
       } catch (error) {
         throw error;
       }
