@@ -48,9 +48,7 @@
     "handlebars": "^4.1.2",
     "isvalid": "^2.4.6",
     "js-yaml": "^3.13.1",
-    "mapTypes": "github:vonor/maptypes"
-  },
-  "devDependencies": {
+    "mapTypes": "github:vonor/maptypes",
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
