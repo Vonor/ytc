@@ -32,7 +32,7 @@ const convert = async (inputFile) => {
         const template = await handlebars.compile(templateData);
         inputData.env = process.env
         const result = await template(inputData)
-        const outputextension = inputData.outputextension
+        const outputextension = inputData.outputextension || '.conf'
         const outfile = path.resolve(inputFile.replace('configs', 'output').replace(path.extname(inputFile), outputextension))
         try {
             await mkdir(path.dirname(outfile), { recursive: true })
