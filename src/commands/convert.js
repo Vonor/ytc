@@ -4,6 +4,8 @@ import {promisify} from 'util';
 import fs from 'fs';
 import handlebars from 'handlebars';
 const fileRead = promisify(fs.readFile);
+const fileWrite = promisify(fs.writeFile);
+const mkdir = promisify(fs.mkdir)
 
 handlebars.registerHelper({
     'toLowerCase': function(str) {
@@ -30,7 +32,14 @@ const convert = async (inputFile) => {
         const template = await handlebars.compile(templateData);
         inputData.env = process.env
         const result = await template(inputData)
-        console.log(result)
+        const outputextension = inputData.outputextension
+        const outfile = path.resolve(inputFile.replace('configs', 'output').replace(path.extname(inputFile), outputextension))
+        try {
+            await mkdir(path.dirname(outfile), { recursive: true })
+            await fileWrite(outfile, result)
+        } catch (error) {
+            throw error
+        }
     } catch (error) {
         console.log(error)
         process.exit(1)

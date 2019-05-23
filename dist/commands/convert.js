@@ -20,6 +20,8 @@ var _fs = _interopRequireDefault(require("fs"));
 var _handlebars = _interopRequireDefault(require("handlebars"));
 
 const fileRead = (0, _util.promisify)(_fs.default.readFile);
+const fileWrite = (0, _util.promisify)(_fs.default.writeFile);
+const mkdir = (0, _util.promisify)(_fs.default.mkdir);
 
 _handlebars.default.registerHelper({
   'toLowerCase': function (str) {
@@ -49,7 +51,18 @@ function () {
       const template = yield _handlebars.default.compile(templateData);
       inputData.env = process.env;
       const result = yield template(inputData);
-      console.log(result);
+      const outputextension = inputData.outputextension;
+
+      const outfile = _path.default.resolve(inputFile.replace('configs', 'output').replace(_path.default.extname(inputFile), outputextension));
+
+      try {
+        yield mkdir(_path.default.dirname(outfile), {
+          recursive: true
+        });
+        yield fileWrite(outfile, result);
+      } catch (error) {
+        throw error;
+      }
     } catch (error) {
       console.log(error);
       process.exit(1);
