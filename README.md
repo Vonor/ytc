@@ -5,7 +5,7 @@ The need for this tool arose when we decided to introduce DevOps practices and C
 
 ## Install
 
-Written and tested with `Node v12.2.0`. Other versions were not tested by me and thus are considered incompatible.
+Compatible with `Node 10`.
 
 ```shell
 $ sudo npm i -g vonor/ytc
@@ -17,7 +17,9 @@ $ sudo npm i -g vonor/ytc
 $ ytc [command] [file]
 ```
 
-It is expected that your have the following Directory structure
+Whereas `command` can be either `convert` (or `c` for short) or `validate` (or `v` for short)
+
+It is expected that your have the following directory structure
 
 ```shell
 $ tree
@@ -33,16 +35,24 @@ $ tree
 
 ```
 
-The `configs` folder will hold all the yaml configuration files. It can have subdirectories. The `schemas` folder will store all the schema files and the `templates` folder stores all templates.
+The `configs` folder will hold all the `yaml` configuration files. It can have subdirectories. The `schemas` folder will store all the schema files and the `templates` folder stores all templates. Both directories should be flat.
 
 ### Yaml files
 
-The only requirement from the app is, that every `yaml` file contains an entry `Schema`.
+Each `yaml` file needs to have the following structure:
+
+```yaml
+Schema: schema
+outputextension: .ext
+```
+
+Whereas `Schema` represents the name of the schema-file and `outputextension` represents the file extension for the output; Default: `.conf`
 
 For example:
 
 ```yaml
 Schema: apache_vhost
+outputextension: .conf
 VirtualHost:
   IP: 127.0.0.1
   http_port: 80
@@ -65,6 +75,10 @@ Schema:
   type: string
   required: true
   equal: apache_vhost
+outputextension:
+  type: string
+  required: true
+  match: ^\..+$
 VirtualHost:
   type: object
   required: true
@@ -103,7 +117,7 @@ Output as JSON.
 
 Please be aware that the Environment is added to the Root Object as well and would be included in the output of above statement.
 
-Access to the environtmen variables can be done via
+Access to the environment variables can be done via
 
 ```shell
 export SOMEVAR="foobar"
@@ -114,7 +128,7 @@ ytc convert file
 {{env.SOMEVAR}}
 ```
 
-You could also have an environemnt variable that contains `json` Data.
+You could also have an environment variable that contains `json` Data.
 
 ```shell
 export SOMEVAR='{"date":"'$(date)'","author":"'${USERNAME}'"}'
@@ -131,21 +145,14 @@ Date: {{somevar.date}}
 The following `Handlebars` `HelperFunctions` are defined. They can be called via `{{{toUpperCase "string"}}}`. For example `{{{toUpperCase VirtualHost.servername}}}`. Please notice the tripple brackets to ensure strings are not safeloaded for HTML!
 
 ```javascript
-    'toLowerCase': function(str) {
-        return str.toLowerCase();
-    },
-    'toUpperCase': function(str) {
-        return str.toUpperCase();
-    },
-    'parse': function(str) {
-        return JSON.parse(str);
-    },
-    'stringify': function(str) {
-        return JSON.stringify(str, null, 2);
-    },
-    'assignjson': function(varname, value, options) {
-        options.data.root[varname] = JSON.parse(value);
-    }
+toLowerCase(str) // return str.toLowerCase()
+toUpperCase(str) // return str.toUpperCase()
+parse(str) // return JSON.parse(str);
+stringify(str) // return JSON.stringify(str, null, 2);
+assignjson(varname, value) // parses JSON 'value' and assigns it to 'varname'
+is(a, b) // Compare a with b
+isnot(a, b) // Compare whether a is not equal to b
+length(a) // if a is object, return length, otherwise '#'
 ```
 
-If you need more helper functions please send a Pull Request
+If you need more helper functions please file a [Github Issue](https://github.com/Vonor/ytc/issues)
