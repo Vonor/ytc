@@ -7,9 +7,9 @@
   "description": "Yaml templating for config files",
   "main": "dist/ytc.js",
   "scripts": {
-    "start": "babel-node .",
+    "start": "babel-node src/ytc.js",
     "build": "babel src --out-dir dist",
-    "pkg": "npm run build && pkg -t node10-linux --out-path pkg/ ."
+    "pkg": "npm run build && pkg -t node10-linux -o pkg/ytc ."
   },
   "keywords": [
     "yaml",

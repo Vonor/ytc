@@ -18,7 +18,6 @@ const validate = async (inputFile) => {
         const result = JSON.parse(JSON.stringify(valid));
         return result;
     } catch (error) {
-        console.log('error:',error)
         throw new Error(error)
     }
 }

@@ -11,6 +11,8 @@ var _package = _interopRequireDefault(require("../package.json"));
 
 var _convert = _interopRequireDefault(require("./commands/convert"));
 
+var _validate = _interopRequireDefault(require("./commands/validate"));
+
 const version = _package.default.version; // const runTests = (file) => {
 //   console.log('Run tests for file ' + file)
 // }
@@ -25,10 +27,11 @@ function () {
   return function runConvert(_x) {
     return _ref.apply(this, arguments);
   };
-}(); // const runValidate = (file) => {
-//   validate(file)
-// }
+}();
 
+const runValidate = file => {
+  (0, _validate.default)(file);
+};
 
 _commander.default.version('ytc ' + version).allowUnknownOption(false);
 
@@ -47,12 +50,9 @@ function () {
 //   .alias('t')
 //   .description('Run tests against <file>')
 //   .action((file) => runTests(file));
-// ytc
-//   .command('validate <file>')
-//   .alias('v')
-//   .description('Validate <file>')
-//   .action((file) => runValidate(file));
 
+
+_commander.default.command('validate <file>').alias('v').description('Validate <file>').action(file => runValidate(file));
 
 _commander.default.on('command:*', function () {
   console.error('Invalid command: %s\n', _commander.default.args.join(' '));

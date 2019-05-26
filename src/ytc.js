@@ -3,6 +3,7 @@
 import ytc from 'commander';
 import pkg from '../package.json';
 import convert from './commands/convert';
+import validateFn from './commands/validate';
 const version = pkg.version;
 
 
@@ -14,9 +15,9 @@ const runConvert = async (file) => {
   await convert(file)
 }
 
-// const runValidate = (file) => {
-//   validate(file)
-// }
+const runValidate = (file) => {
+  validateFn(file)
+}
 
 ytc
   .version('ytc ' + version)
@@ -34,11 +35,11 @@ ytc
 //   .description('Run tests against <file>')
 //   .action((file) => runTests(file));
 
-// ytc
-//   .command('validate <file>')
-//   .alias('v')
-//   .description('Validate <file>')
-//   .action((file) => runValidate(file));
+ytc
+  .command('validate <file>')
+  .alias('v')
+  .description('Validate <file>')
+  .action((file) => runValidate(file));
 
 ytc
   .on('command:*', function () {
