@@ -8,20 +8,38 @@ const fileWrite = promisify(fs.writeFile);
 const mkdir = promisify(fs.mkdir)
 
 handlebars.registerHelper({
-    'toLowerCase': function(str) {
+    'toLowerCase': (str) => {
         return str.toLowerCase();
     },
-    'toUpperCase': function(str) {
+    'toUpperCase': (str) => {
         return str.toUpperCase();
     },
-    'parse': function(str) {
+    'parse': (str) => {
         return JSON.parse(str);
     },
-    'stringify': function(str) {
+    'stringify': (str) => {
         return JSON.stringify(str, null, 2);
     },
-    'assignjson': function(varname, value, options) {
+    'assignjson': (varname, value, options) => {
         options.data.root[varname] = JSON.parse(value);
+    },
+    'is': (a, b, opts) => {
+        if (a == b) {
+            return opts.fn(this)
+        } else {
+            return opts.inverse(this)
+        }
+    },
+    'isnot': (a, b, opts) => {
+        if (a != b) {
+            return opts.fn(this)
+        } else {
+            return opts.inverse(this)
+        }
+    },
+    'length': (a) => {
+        if (typeof a === 'object') return a.length
+        return '#'
     }
 });
 
