@@ -3,7 +3,7 @@
   "bin": {
     "ytc": "dist/ytc.js"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yaml templating for config files",
   "main": "dist/ytc.js",
   "scripts": {
