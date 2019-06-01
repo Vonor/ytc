@@ -1,3 +1,6 @@
+[![dependencies Status](https://david-dm.org/vonor/ytc/status.svg)](https://david-dm.org/vonor/ytc)
+[![devDependencies Status](https://david-dm.org/vonor/ytc/dev-status.svg)](https://david-dm.org/vonor/ytc?type=dev)
+
 # ytc - Yaml Template Converter
 
 With `ytc` it is possible to validate a yaml file against a schema and render it as whatever configuration file you need.
@@ -8,8 +11,13 @@ The need for this tool arose when we decided to introduce DevOps practices and C
 Compatible with `Node 10`.
 
 ```shell
-$ sudo npm i -g vonor/ytc
+git clone https://github.com/Vonor/ytc
+cd ytc
+npm install
+npm run pkg
 ```
+
+The ready binary will be in the `pkg` directory.
 
 ## Usage
 
