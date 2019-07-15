@@ -1,7 +1,7 @@
+# ytc - Yaml Template Converter
+
 [![dependencies Status](https://david-dm.org/vonor/ytc/status.svg)](https://david-dm.org/vonor/ytc)
 [![devDependencies Status](https://david-dm.org/vonor/ytc/dev-status.svg)](https://david-dm.org/vonor/ytc?type=dev)
-
-# ytc - Yaml Template Converter
 
 With `ytc` it is possible to validate a yaml file against a schema and render it as whatever configuration file you need.
 The need for this tool arose when we decided to introduce DevOps practices and Config Management. Since a lot of tools for DevOps practices use `yaml` for their configurations I thought it practical to have all our config files in `yaml` for easier maintainability.
@@ -22,7 +22,7 @@ The ready binary will be in the `pkg` directory.
 ## Usage
 
 ```shell
-$ ytc [command] [file]
+ytc [command] [file]
 ```
 
 Whereas `command` can be either `convert` (or `c` for short) or `validate` (or `v` for short)
@@ -108,6 +108,7 @@ VirtualHost:
 As rendering engine [Handlebars](https://handlebarsjs.com/) is used. Please check their documentation for details on templating. Below are two quick examples based on the above mentioned `yaml` file.
 
 Output as Apache VirtualHost configuration file
+
 ```hbs
 Listen {{VirtualHost.IP}}:{{VirtualHost.http_port}}
 
